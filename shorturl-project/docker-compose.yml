@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  todo-service:
+    build: ./todo_service
+    container_name: fastapi-todo-container
+    ports:
+      - "8000:8000"
+    volumes:
+      - todo_data:/data
+    restart: unless-stopped
+
+  shorturl-service:
+    build: ./shorturl_service
+    container_name: fastapi-shorturl-container
+    ports:
+      - "8001:8000"
+    volumes:
+      - shorturl_data:/data
+    restart: unless-stopped
+
+volumes:
+  todo_data:
+    driver: local
+  shorturl_data:
+    driver: local
